@@ -140,12 +140,12 @@ class Treemap(object):
             mn = min(areas)
             mx = max(areas)
 
-            current = max(width*width*mx/sm*sm, sm*sm/(width*width*mn))
+            current = max(width*width*mx/(sm*sm), sm*sm/(width*width*mn))
 
             sm += item[1]
             mn = min(mn, item[1])
             mx = max(mn, item[1])
-            new = max(width*width*mx/sm*sm, sm*sm/(width*width*mn))
+            new = max(width*width*mx/(sm*sm), sm*sm/(width*width*mn))
 
             #Note: this inequality was wrong in the original paper
             return current >= new
