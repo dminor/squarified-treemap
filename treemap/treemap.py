@@ -66,7 +66,7 @@ class Treemap(object):
                 self.height = height
 
             def side(self):
-                return max(self.width, self.height)
+                return min(self.width, self.height)
 
         rect = Rect(0.0, 0.0, 1.0, 1.0)
         self.squarify(rect, fn)
