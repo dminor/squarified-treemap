@@ -24,8 +24,7 @@
 # Create a treemap of the colours used in a image.
 #
 
-import Image
-import ImageDraw
+from PIL import Image, ImageDraw
 import math
 import random
 import sys
@@ -61,13 +60,11 @@ for image in images:
         else:
             key = datum
 
-        if colours.has_key(key):
-            colours[key] += 1
-        else:
-            colours[key] = 1
+        colours[key] = colours.setdefault(key, 0) + 1
+
 
 #we take at most the 20 most commonly used colours, then normalize the areas
-values = sorted(colours.iteritems(), key=lambda x: x[1], reverse=True)[:20]
+values = sorted(colours.items(), key=lambda x: x[1], reverse=True)[:20]
 area = sum(map(lambda x: float(x[1]), values))
 values = map(lambda x: (x[0], float(x[1])/area), values)
 
