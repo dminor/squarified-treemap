@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2013 Daniel Minor 
+# Copyright (c) 2013 Daniel Minor
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ if len(sys.argv) < 2:
     print('usage: %s <file> ...' % sys.argv[0])
     sys.exit()
 
-# get list of image filenames to process 
+# get list of image filenames to process
 images = sys.argv[1:]
 
 # iterate through each image specified, and count the number of pixels of
@@ -68,7 +68,7 @@ for image in images:
 
 #we take at most the 20 most commonly used colours, then normalize the areas
 values = sorted(colours.iteritems(), key=lambda x: x[1], reverse=True)[:20]
-area = sum(map(lambda x: float(x[1]), values)) 
+area = sum(map(lambda x: float(x[1]), values))
 values = map(lambda x: (x[0], float(x[1])/area), values)
 
 # create output file
@@ -82,4 +82,4 @@ def renderfn(pos, col):
 treemap = treemap.Treemap(values)
 treemap.render(renderfn)
 
-out.save('treemap.jpg') 
+out.save('treemap.jpg')

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2013 Daniel Minor 
+# Copyright (c) 2013 Daniel Minor
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,11 @@ class Treemap(object):
 
     """
     Squarified treemap implementation based upon the following paper:
-    
+
         Bruls, M., Huizing, K., van Wijk, J. (1999) Squarified Treemaps
         In Proceedings of the Joint Eurographics and IEEE TCVP Symposium on
         Visualization, pp. 33--42
-        
+
     """
 
     def __init__(self, items):
@@ -55,7 +55,7 @@ class Treemap(object):
 
         class Rect:
             """
-                This class keeps track of the remaining area available in which 
+                This class keeps track of the remaining area available in which
                 to render rectangles.
             """
 
@@ -80,14 +80,14 @@ class Treemap(object):
         """
 
         area = sum([x[1] for x in row])
- 
+
         if rect.width > rect.height:
             width = area / rect.height
 
             y = rect.y
             for item in row:
                 height = item[1] / area * rect.height
-                renderfn((rect.x, y, rect.x + width, y + height), item[0]) 
+                renderfn((rect.x, y, rect.x + width, y + height), item[0])
                 y += height
 
             rect.width -= width
@@ -99,10 +99,10 @@ class Treemap(object):
             for item in row:
                 width = item[1] / area * rect.width
                 renderfn((x, rect.y, x + width, rect.y + height), item[0])
-                x += width 
+                x += width
 
-            rect.height -= height 
-            rect.y += height 
+            rect.height -= height
+            rect.y += height
 
     def squarify(self, rect, renderfn):
 
@@ -114,10 +114,10 @@ class Treemap(object):
 
         row = []
 
-        for item in self.items: 
+        for item in self.items:
             if self.improvesRatio(row, item, rect.side()):
                 row.append(item)
-            else: 
+            else:
                 self.layoutrow(rect, row, renderfn)
                 row = [item]
 
@@ -125,20 +125,20 @@ class Treemap(object):
             self.layoutrow(rect, row, renderfn)
 
 
-    def improvesRatio(self, row, item, width): 
+    def improvesRatio(self, row, item, width):
 
         """
-            Return true if adding the item to the row does not cause the 
+            Return true if adding the item to the row does not cause the
             aspect ratio of the row to become worse.
         """
 
         if len(row) == 0:
             return True
-        else: 
+        else:
             areas = [x[1] for x in row]
             sm = sum(areas)
             mn = min(areas)
-            mx = max(areas) 
+            mx = max(areas)
 
             current = max(width*width*mx/sm*sm, sm*sm/(width*width*mn))
 
